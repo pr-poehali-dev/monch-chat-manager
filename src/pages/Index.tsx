@@ -1,41 +1,16 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 
 export default function Index() {
   const [onboardingStep, setOnboardingStep] = useState(0);
-  const [currentScreen, setCurrentScreen] = useState<'onboarding' | 'auth' | 'info' | 'stats'>('onboarding');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [verificationCode, setVerificationCode] = useState('');
-  const [authStep, setAuthStep] = useState<'phone' | 'code'>('phone');
+  const [currentScreen, setCurrentScreen] = useState<'onboarding' | 'info' | 'stats'>('onboarding');
 
   const nextOnboardingStep = () => {
     if (onboardingStep < 2) {
       setOnboardingStep(onboardingStep + 1);
     } else {
-      setCurrentScreen('auth');
-    }
-  };
-
-  const handlePhoneSubmit = () => {
-    if (phoneNumber.length >= 10) {
-      setAuthStep('code');
-    }
-  };
-
-  const handleCodeSubmit = () => {
-    if (verificationCode.length === 6) {
       setCurrentScreen('info');
     }
-  };
-
-  const formatPhoneNumber = (value: string) => {
-    const numbers = value.replace(/\D/g, '');
-    if (numbers.length <= 1) return numbers;
-    if (numbers.length <= 4) return `+${numbers.slice(0, 1)} (${numbers.slice(1)}`;
-    if (numbers.length <= 7) return `+${numbers.slice(0, 1)} (${numbers.slice(1, 4)}) ${numbers.slice(4)}`;
-    if (numbers.length <= 9) return `+${numbers.slice(0, 1)} (${numbers.slice(1, 4)}) ${numbers.slice(4, 7)}-${numbers.slice(7)}`;
-    return `+${numbers.slice(0, 1)} (${numbers.slice(1, 4)}) ${numbers.slice(4, 7)}-${numbers.slice(7, 9)}-${numbers.slice(9, 11)}`;
   };
 
   const onboardingContent = [
@@ -103,86 +78,6 @@ export default function Index() {
               >
                 {currentOnboarding.buttonText}
               </Button>
-            </div>
-          </div>
-        )}
-
-        {currentScreen === 'auth' && (
-          <div className="flex-1 flex items-center justify-center p-6 animate-fade-in">
-            <div className="max-w-md w-full space-y-8">
-              <div className="bg-white/95 backdrop-blur-xl rounded-[2.5rem] p-10 space-y-8 shadow-[0_20px_60px_rgba(0,0,0,0.3)]">
-                {authStep === 'phone' ? (
-                  <>
-                    <div className="text-center space-y-3">
-                      <h2 className="text-3xl font-semibold text-gray-900">Вход</h2>
-                      <p className="text-gray-500 text-base">Введите номер телефона для продолжения</p>
-                    </div>
-
-                    <div className="space-y-6">
-                      <div className="space-y-2">
-                        <label className="text-sm font-medium text-gray-700 pl-4">Номер телефона</label>
-                        <Input
-                          type="tel"
-                          placeholder="+7 (___) ___-__-__"
-                          value={phoneNumber}
-                          onChange={(e) => setPhoneNumber(formatPhoneNumber(e.target.value))}
-                          className="h-14 rounded-2xl border-gray-200 bg-gray-50 text-lg px-4 focus:bg-white focus:border-[#0EA5E9] transition-all"
-                        />
-                      </div>
-
-                      <Button
-                        onClick={handlePhoneSubmit}
-                        disabled={phoneNumber.length < 10}
-                        className="w-full h-14 bg-[#0EA5E9] hover:bg-[#0284C7] text-white font-semibold text-lg rounded-2xl shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all"
-                      >
-                        Продолжить
-                      </Button>
-                    </div>
-
-                    <div className="text-center">
-                      <p className="text-xs text-gray-400">
-                        Нажимая "Продолжить", вы соглашаетесь с условиями использования
-                      </p>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div className="text-center space-y-3">
-                      <h2 className="text-3xl font-semibold text-gray-900">Код подтверждения</h2>
-                      <p className="text-gray-500 text-base">Введите 6-значный код из SMS</p>
-                      <p className="text-sm text-gray-400">{phoneNumber}</p>
-                    </div>
-
-                    <div className="space-y-6">
-                      <div className="space-y-2">
-                        <Input
-                          type="text"
-                          placeholder="000000"
-                          maxLength={6}
-                          value={verificationCode}
-                          onChange={(e) => setVerificationCode(e.target.value.replace(/\D/g, ''))}
-                          className="h-14 rounded-2xl border-gray-200 bg-gray-50 text-center text-2xl font-semibold tracking-[0.5em] focus:bg-white focus:border-[#0EA5E9] transition-all"
-                        />
-                      </div>
-
-                      <Button
-                        onClick={handleCodeSubmit}
-                        disabled={verificationCode.length !== 6}
-                        className="w-full h-14 bg-[#0EA5E9] hover:bg-[#0284C7] text-white font-semibold text-lg rounded-2xl shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all"
-                      >
-                        Войти
-                      </Button>
-
-                      <button
-                        onClick={() => setAuthStep('phone')}
-                        className="w-full text-[#0EA5E9] font-medium text-base hover:text-[#0284C7] transition-colors"
-                      >
-                        Изменить номер
-                      </button>
-                    </div>
-                  </>
-                )}
-              </div>
             </div>
           </div>
         )}
