@@ -159,27 +159,30 @@ export default function Index() {
 
         {currentScreen !== 'onboarding' && (
           <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-20">
-            <div className="bg-white/20 backdrop-blur-xl rounded-full p-2 flex gap-2 shadow-2xl border border-white/20">
-              <button
-                onClick={() => setCurrentScreen('info')}
-                className={`px-8 py-3 rounded-full font-semibold transition-all ${
-                  currentScreen === 'info'
-                    ? 'bg-white text-[#F97316] shadow-lg'
-                    : 'text-white hover:bg-white/10'
-                }`}
-              >
-                Информация
-              </button>
-              <button
-                onClick={() => setCurrentScreen('stats')}
-                className={`px-8 py-3 rounded-full font-semibold transition-all ${
-                  currentScreen === 'stats'
-                    ? 'bg-white text-[#F97316] shadow-lg'
-                    : 'text-white hover:bg-white/10'
-                }`}
-              >
-                Статистика
-              </button>
+            <div className="relative bg-white/15 backdrop-blur-2xl rounded-[2rem] p-1.5 shadow-[0_8px_32px_0_rgba(0,0,0,0.2)] border border-white/30">
+              <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-white/10 to-transparent rounded-[2rem]" />
+              <div className="relative flex gap-2">
+                <button
+                  onClick={() => setCurrentScreen('info')}
+                  className={`relative px-8 py-3.5 rounded-[1.75rem] font-semibold transition-all duration-300 ${
+                    currentScreen === 'info'
+                      ? 'bg-white text-[#F97316] shadow-[0_4px_20px_rgba(255,255,255,0.4)]'
+                      : 'text-white hover:bg-white/10'
+                  }`}
+                >
+                  Информация
+                </button>
+                <button
+                  onClick={() => setCurrentScreen('stats')}
+                  className={`relative px-8 py-3.5 rounded-[1.75rem] font-semibold transition-all duration-300 ${
+                    currentScreen === 'stats'
+                      ? 'bg-white text-[#F97316] shadow-[0_4px_20px_rgba(255,255,255,0.4)]'
+                      : 'text-white hover:bg-white/10'
+                  }`}
+                >
+                  Статистика
+                </button>
+              </div>
             </div>
           </div>
         )}
