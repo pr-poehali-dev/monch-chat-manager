@@ -131,7 +131,7 @@ export default function Index() {
                 
                 <div className="space-y-6">
                   <div className="bg-white/10 rounded-2xl p-6">
-                    <p className="text-white/80 text-sm mb-2">Проведено свдв на данный момент (все чаты):</p>
+                    <p className="text-white/80 text-sm mb-2">Проведено судов на данный момент (все чаты):</p>
                     <p className="text-4xl font-bold text-white">396 суда</p>
                   </div>
 
